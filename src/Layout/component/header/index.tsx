@@ -39,7 +39,7 @@ const Index: React.FC<IndexType> = (props) => {
   const [open, setOpen] = useState(false);
 
   return (
-    <nav className="app-header flex-between">
+    <nav className="root-header flex-between">
       <Leftview />
       <Rightview
         onClick={() => {
