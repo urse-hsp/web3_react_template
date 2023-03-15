@@ -21,7 +21,7 @@ const ETHERSCAN_PREFIXES: Record<number, string> = {
   1230: 'scan.fibochain.org',
 };
 
-export function getEtherscanLink(
+export function getEthScanPath(
   chainId: number,
   data: string,
   type: 'transaction' | 'token' | 'address',
@@ -42,11 +42,11 @@ export function getEtherscanLink(
     }
   }
 }
-export function formatAddress(address: string) {
+export function address_formatter(address: string) {
   return `${address.slice(0, 6)}...${address.slice(-4)}`;
 }
 
-export function formatHash(hash: string) {
+export function hash_formatter(hash: string) {
   if (hash.length <= 12) return hash;
   return `${hash.slice(0, 8)}...${hash.slice(-4)}`;
 }
@@ -72,7 +72,7 @@ export const digitalPrecision = (
 };
 
 // 处理对象BigNumber数据
-export const setObjBigNumber = (
+export const analysisBigNumber = (
   data = {},
   fn = (e: any) => {
     return e;
@@ -92,29 +92,27 @@ export const setObjBigNumber = (
 };
 
 // interface Result extends ReadonlyArray<any> {
-//    readonly [key: string]: any;f
+//    readonly [key: string]: any;
 // }
 type dataType = Record<string, any>;
 export type MethodArg = dataType | string | number | BigNumber;
-export interface CallState {
+export interface ReturnState {
   readonly value: any; // MethodArg | undefined;
-  // true if the result has never been fetched
   readonly loading: boolean;
-  // true if the call was made and is synced, but the return data is invalid
   readonly error: boolean;
   [key: string]: any;
 }
 
-const INVALID_CALL_STATE: CallState = {
+const INVALID_CALL_STATE: ReturnState = {
   value: undefined,
   loading: false,
   error: false,
 };
 // 状态
-export function toCallState(
+export function toReturnState(
   value: MethodArg | undefined = undefined,
   methodName?: string,
-): CallState {
+): ReturnState {
   if (!value) return INVALID_CALL_STATE;
 
   const obj_data = Object.entries(value)
@@ -122,7 +120,7 @@ export function toCallState(
     .some((item) => (item ?? '') !== ''); // (item ?? '') !== '' // 判断是否是对象，并且属性是否有值[兼容字符串等]
 
   if (value) {
-    const data: CallState = {
+    const data: ReturnState = {
       loading: obj_data,
       error: false,
       value: ethers.BigNumber.isBigNumber(value) ? value.toString() : value,

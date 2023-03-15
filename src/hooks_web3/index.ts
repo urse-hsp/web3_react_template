@@ -1,10 +1,10 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useWeb3Provider } from '@/models/Web3ReactProvider';
 import { type Contract, ethers } from 'ethers';
-import { toCallState, type MethodArg } from './utils';
+import { toReturnState, type MethodArg } from './utils';
 import AppState from '@/models/appState';
 import { message, notification } from 'antd';
-import { formatHash, getEtherscanLink, isAddress } from './utils';
+import { hash_formatter, getEthScanPath, isAddress } from './utils';
 
 // 单个调用结果
 export function useSingleResult(
@@ -28,12 +28,12 @@ export function useSingleResult(
   }, [contract?.address, account]); // , fragment
 
   return useMemo(() => {
-    return toCallState(data, methodName);
+    return toReturnState(data, methodName);
   }, [data]);
 }
 
 // message
-export const useMessage = () => {
+export const useHashMessage = () => {
   const { web3Provider: provider, chainId } = useWeb3Provider();
   const [loading, setLoading] = useState<boolean>(false);
   const { setLoadingHashAddress, changeHashAddress } = AppState.useContainer();
@@ -56,10 +56,10 @@ export const useMessage = () => {
         notification.success({
           placement: 'topRight',
           message: successText,
-          description: `View on fiboscan:${formatHash(hash)}`,
+          description: `View on fiboscan:${hash_formatter(hash)}`,
           onClick: () => {
             window.open(
-              getEtherscanLink(chainId ?? 0, hash, 'transaction'),
+              getEthScanPath(chainId ?? 0, hash, 'transaction'),
               '_blank',
             );
           },

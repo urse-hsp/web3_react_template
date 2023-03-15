@@ -1,12 +1,12 @@
 import { useMemo, useEffect, useState } from 'react';
 import { useTokenContract } from './useContract';
 import { useSingleResult } from './index';
-import { toCallState, type CallState } from './utils';
+import { toReturnState, type ReturnState } from './utils';
 import { useWeb3Provider } from '@/models/Web3ReactProvider';
 import { BigNumber } from 'bignumber.js';
 
 // TODO: 查找token（用户合约可以查询token地址的信息等。本地有信息则本地返回）
-export function useToken(tokenAddress?: string): CallState {
+export function useToken(tokenAddress?: string): ReturnState {
   const TokenContract = useTokenContract(tokenAddress);
   const { symbol } = useSingleResult(TokenContract, 'symbol');
   const { decimals } = useSingleResult(TokenContract, 'decimals');
@@ -19,12 +19,12 @@ export function useToken(tokenAddress?: string): CallState {
       name,
       address: tokenAddress,
     };
-    return toCallState(data);
+    return toReturnState(data);
   }, [symbol, decimals, name]);
 }
 
 // token余额
-export const useCurrencyBalances = (tokenAddress?: string): CallState => {
+export const useCurrencyBalances = (tokenAddress?: string): ReturnState => {
   const { account } = useWeb3Provider();
 
   const TokenContract = useTokenContract(tokenAddress ?? undefined);
@@ -39,12 +39,12 @@ export const useCurrencyBalances = (tokenAddress?: string): CallState => {
         : '',
     };
 
-    return toCallState(data);
+    return toReturnState(data);
   }, [decimals, balanceOf, tokenAddress]);
 };
 
 // eth余额
-export const useETHBalances = (): CallState => {
+export const useETHBalances = (): ReturnState => {
   const { account, web3Provider: provider } = useWeb3Provider();
   const [pending, setPending] = useState();
 
@@ -65,6 +65,6 @@ export const useETHBalances = (): CallState => {
         ? BigNumber(pending).div(Math.pow(10, 18)).toFixed()
         : '',
     };
-    return toCallState(data);
+    return toReturnState(data);
   }, [pending]);
 };

@@ -16,7 +16,7 @@ function useAppState(): defaultStatesType {
     [],
   ); // 上链列表交易哈希列表
 
-  // const { setMessage } = useMessage();
+  // const { setMessage } = useHashMessage();
 
   const changeHashAddress = (address: string) => {
     setHashAddressList([...hashAddress, address]);
