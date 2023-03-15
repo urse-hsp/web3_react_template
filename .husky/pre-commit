@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# npx lint-staged
+npx --no-install lint-staged --quiet
+
+# 执行测试用例
+# npm run test:unit

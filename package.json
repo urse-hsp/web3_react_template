@@ -1,0 +1,97 @@
+{
+  "name": "template",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@infte/reset.css": "^0.0.1",
+    "@metamask/detect-provider": "^2.0.0",
+    "antd": "^5.2.2",
+    "bignumber.js": "^9.1.1",
+    "dayjs": "^1.11.7",
+    "ethers": "5.7.2",
+    "i18next": "^22.4.10",
+    "i18next-browser-languagedetector": "^7.0.1",
+    "i18next-http-backend": "^2.1.1",
+    "react": "^18.2.0",
+    "react-countup": "^6.4.2",
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.1.5",
+    "react-router-dom": "^6.8.1",
+    "swr": "^2.1.0",
+    "unstated-next": "^1.1.0",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "dev": "yarn start",
+    "start": "yarn start:dev",
+    "start:dev": "dotenv -e config/.env.development craco start",
+    "start:test": "dotenv -e config/.env.test craco start",
+    "start:pro": "dotenv -e config/.env.production craco start",
+    "build": "yarn build:pro",
+    "build:dev": "dotenv -e config/.env.development craco build",
+    "build:test": "dotenv -e config/.env.test craco build",
+    "build:pro": "dotenv -e config/.env.production craco build",
+    "test": "craco test",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --cache --write"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix --quiet",
+      "prettier --cache --write"
+    ],
+    "*.{css,scss}": [
+      "prettier --cache --write"
+    ],
+    "*.ts?(x)": [
+      "eslint --fix --quiet",
+      "prettier --cache --parser=typescript --write"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@craco/craco": "^7.0.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.12",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.0.0",
+    "babel-plugin-import": "^1.13.6",
+    "dotenv-cli": "^7.0.0",
+    "eslint": "^8.0.1",
+    "eslint-config-standard-with-typescript": "^34.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.1.2",
+    "node-sass": "^8.0.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-px-to-viewport": "^1.1.1",
+    "prettier": "^2.8.4",
+    "react-scripts": "^5.0.1",
+    "terser-webpack-plugin": "^5.3.7",
+    "typescript": "^4.9.5",
+    "webpack-bundle-analyzer": "^4.8.0"
+  }
+}

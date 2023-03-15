@@ -1,0 +1,9 @@
+@import '@infte/reset.css';
+@import './lay.scss';
+
+// // 转换成vw的方案设置媒体查询超出宽度范围后固定body宽度，内容居中时，会出现样式过大影响查看的问题。
+// @media screen and (min-width: 1024px) {
+//   html {
+//     margin: auto;
+//   }
+// }

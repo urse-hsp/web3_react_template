@@ -1,0 +1,5 @@
+# 配置prettier忽略文件
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html

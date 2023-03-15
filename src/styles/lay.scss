@@ -1,0 +1,87 @@
+.flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-item-center {
+  display: flex;
+  align-items: center;
+}
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.flex-cloumn-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+// *********************** //
+
+// 省略号几行
+@mixin textOverflow($numRow: 100%) {
+  white-space: normal;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden; //溢出内容隐藏
+  text-overflow: ellipsis; //文本溢出部分用省略号表示
+  display: -webkit-box; //特别显示模式
+  -webkit-line-clamp: $numRow; //行数
+  line-clamp: $numRow !important;
+  -webkit-box-orient: vertical; //盒子中内容竖直排列
+}
+
+// 宫格布局
+@mixin grid($num: 3, $width: 12px) {
+  display: grid;
+  grid-gap: $width;
+  grid-template-columns: repeat($num, 1fr);
+}
+
+// 悬浮小手
+@mixin cursor($active: true) {
+  cursor: pointer !important;
+
+  &:hover {
+    opacity: 0.7 !important;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.cursor {
+  @include cursor;
+}
+
+@mixin centreX {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin centreY {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.vertical-centre {
+  @include centreX;
+  @include centreY;
+}

@@ -1,0 +1,11 @@
+// window.document.documentElement.setAttribute
+// /* 亮色模式 */
+// html[theme-color='light']:root {
+//   --warning-color: #ffa94e;
+// }
+// /* 深色模式 */
+// html[theme-color='dark']:root {
+//   --warning-color: #ff0d41;
+// }
+
+$colorPrimary: var(--colorPrimary);
