@@ -1,9 +1,30 @@
 @import '@infte/reset.css';
 @import './lay.scss';
 
-// // 转换成vw的方案设置媒体查询超出宽度范围后固定body宽度，内容居中时，会出现样式过大影响查看的问题。
+// 1. postcss-px-to-viewport转换 VW 方案: 转换成vw的方案设置媒体查询超出宽度范围后固定body宽度，内容居中时，会出现样式过大影响查看的问题。
 // @media screen and (min-width: 1024px) {
 //   html {
-//     margin: auto;
+//     max-width: 1024px;
 //   }
 // }
+
+// 2. postcss-px-to-viewport转换 REM 方案: 避免不同浏览器的默认字体大小不一样导致大小不一致的问题，我们需要固定好root元素 html的font-size
+//  同样设置媒体查询超出宽度范围后固定body宽度，内容居中
+
+// 3.rem + vw（网易移动端做法）
+
+html {
+  font-size: 26.6666666666666667vw;
+  margin: 0 auto;
+  body {
+    // 重置字体大小
+    font-size: 0.14rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 9vw;
+    max-width: 768px;
+  }
+}
