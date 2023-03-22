@@ -3,21 +3,9 @@ const TerserPlugin = require('terser-webpack-plugin');
 
 const postcss = require('./config/postcss.config');
 const resolve = (dir) => require('path').resolve(__dirname, dir);
+const analyze = process.env.REACT_APP_ENV !== 'development'; // 非测试
 
-const analyze = process.env.REACT_APP_ENV !== 'development';
-const isProduction = process.env.REACT_APP_ENV === 'production';
-
-const plugins = [
-  new TerserPlugin({
-    terserOptions: {
-      compress: {
-        drop_console: isProduction, // 生产环境下移除控制台所有的内容
-        drop_debugger: isProduction, // 生产环境下移除断点
-        pure_funcs: isProduction ? ['console.log'] : '', // 生产环境下移除console
-      },
-    },
-  }),
-];
+const plugins = [];
 if (analyze) {
   plugins.push(
     new BundleAnalyzerPlugin({
@@ -27,9 +15,17 @@ if (analyze) {
       openAnalyzer: true, // 构建完打开浏览器
       reportFilename: resolve(__dirname, 'analyzer/index.html'),
     }),
+    new TerserPlugin({
+      terserOptions: {
+        compress: {
+          drop_console: true, // 生产环境下移除控制台所有的内容
+          drop_debugger: true, // 生产环境下移除断点
+          pure_funcs: ['console.log'], // 生产环境下移除console
+        },
+      },
+    }),
   );
 }
-
 module.exports = {
   webpack: {
     alias: {
